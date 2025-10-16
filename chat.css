@@ -1,0 +1,120 @@
+:root {
+    --bubble-me-bg: #0d6efd;
+    --bubble-them-bg: #e9eef5;
+    --bubble-text-light: #ffffff;
+    --bubble-text-dark: #212529;
+}
+
+body {
+    background-color: #f0f2f5;
+    padding-bottom: 70px; /* Espacio para el navbar fijo */
+}
+
+.app-frame {
+    display: flex;
+    flex-direction: column;
+    height: calc(100vh - 70px); /* Altura total menos el navbar */
+    max-width: 480px; /* Ancho de móvil */
+    margin: 0 auto;
+    background-color: #ffffff;
+}
+
+.app-header {
+    display: flex;
+    align-items: center;
+    gap: .75rem;
+    padding: .75rem 1rem;
+    border-bottom: 1px solid #dee2e6;
+    background: #ffffff;
+}
+
+.avatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    background: #6c757d;
+    color: #fff;
+    font-weight: 700;
+}
+
+.header-title {
+    font-weight: 600;
+}
+
+.status-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+}
+.status-online { background: #198754; }
+
+.chat-container {
+    flex-grow: 1;
+    overflow-y: auto;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: .75rem;
+}
+
+.message-row {
+    display: flex;
+    max-width: 80%;
+}
+
+.message-row.is-me {
+    justify-content: flex-end;
+    align-self: flex-end;
+}
+
+.message-row.is-them {
+    justify-content: flex-start;
+    align-self: flex-start;
+}
+
+.bubble {
+    padding: .5rem 1rem;
+    border-radius: 1.25rem;
+    word-wrap: break-word;
+    white-space: pre-wrap;
+    position: relative;
+}
+
+.bubble.is-me {
+    background-color: var(--bubble-me-bg);
+    color: var(--bubble-text-light);
+    border-bottom-right-radius: 0.25rem;
+}
+
+.bubble.is-them {
+    background-color: var(--bubble-them-bg);
+    color: var(--bubble-text-dark);
+    border-bottom-left-radius: 0.25rem;
+}
+
+.meta {
+    font-size: 0.75rem;
+    color: #6c757d;
+    margin-top: 4px;
+    padding: 0 0.5rem;
+}
+
+.composer {
+    display: flex;
+    gap: .5rem;
+    align-items: flex-end;
+    padding: .75rem;
+    border-top: 1px solid #dee2e6;
+    background-color: #f8f9fa;
+}
+
+.composer textarea {
+    resize: none;
+    max-height: 100px;
+}
+
+.btn-send {
+    flex-shrink: 0;
+}
