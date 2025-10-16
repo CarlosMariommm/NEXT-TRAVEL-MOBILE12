@@ -107,71 +107,80 @@
     togglePasswordVisibility('registerPassword', 'registerPasswordIcon');
 
     // =======================================================
-    //          LÓGICA DE CONEXIÓN CON EL BACKEND
+    //          LÓGICA DE CONEXIÓN CON EL BACKEND (CORREGIDO)
     // =======================================================
     const BASE_URL = 'http://localhost:8080/api';
 
-    // --- MANEJO DEL LOGIN (SIN CAMBIOS) ---
+    // --- MANEJO DEL LOGIN (Funciona correctamente) ---
     const loginForm = document.getElementById('loginForm');
-    loginForm.addEventListener('submit', async (e) => {
-        e.preventDefault();
-        const formData = new FormData(loginForm);
-        const data = {
-            correo: formData.get('correo'),
-            password: formData.get('password')
-        };
+loginForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const formData = new FormData(loginForm);
+    const data = {
+        correo: formData.get('correo'),
+        password: formData.get('password')
+    };
 
-        try {
-            const response = await fetch(`${BASE_URL}/auth/login`, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(data)
+    try {
+        const response = await fetch(`${BASE_URL}/auth/login`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(data)
+        });
+
+        if (response.ok) {
+            const responseData = await response.json(); 
+            
+            localStorage.setItem('authToken', responseData.token);
+            localStorage.setItem('usuario', JSON.stringify(responseData.usuario));
+
+            Swal.fire({
+                title: '¡Éxito!', text: 'Inicio de sesión correcto.', icon: 'success',
+                timer: 1500, showConfirmButton: false
+            }).then(() => {
+                // Redirigir a la página de tutorial después del login
+                window.location.href = 'tutorial.html'; // <-- ¡CAMBIO REALIZADO AQUÍ!
             });
-
-            if (response.ok) {
-                Swal.fire({
-                    title: '¡Éxito!', text: 'Inicio de sesión correcto.', icon: 'success',
-                    timer: 1500, showConfirmButton: false
-                }).then(() => {
-                    window.location.href = 'planes.html';
-                });
-            } else {
-                const errorText = await response.text();
+        } else {
+            const errorText = await response.text();
+            try {
+                const errorJson = JSON.parse(errorText);
+                Swal.fire('Error', errorJson.message || 'Credenciales incorrectas.', 'error');
+            } catch (e) {
                 Swal.fire('Error', errorText || 'Credenciales incorrectas.', 'error');
             }
-        } catch (error) {
-            Swal.fire('Error de Conexión', 'No se pudo conectar con el servidor.', 'error');
         }
-    });
+    } catch (error) {
+        console.error('Error de Conexión:', error);
+        Swal.fire('Error de Conexión', 'No se pudo conectar con el servidor.', 'error');
+    }
+});
 
-    // --- MANEJO DEL REGISTRO (SIMPLIFICADO) ---
+    // --- MANEJO DEL REGISTRO (CORREGIDO Y SIMPLIFICADO) ---
     const registerForm = document.getElementById('registerForm');
     registerForm.addEventListener('submit', async (e) => {
         e.preventDefault();
         const formData = new FormData(registerForm);
         
-        // El endpoint del backend espera los datos como FormData porque usa @RequestParam
-        const backendFormData = new FormData();
-        backendFormData.append('nombreUsuario', formData.get('nombreUsuario'));
-        backendFormData.append('correo', formData.get('correo'));
-        backendFormData.append('password', formData.get('password'));
-        backendFormData.append('rol', formData.get('rol'));
-        
-        // Mapeamos el rol de texto a un ID numérico que el backend espera
-        const idTipoUsuario = formData.get('rol') === 'Cliente' ? 1 : 2;
-        backendFormData.append('idTipoUsuario', idTipoUsuario);
+        // Creamos un objeto JSON con los datos del formulario
+        const data = {
+            nombreUsuario: formData.get('nombreUsuario'),
+            correo: formData.get('correo'),
+            password: formData.get('password'),
+            rol: formData.get('rol') // El backend espera el rol como "Cliente" o "Empleado"
+        };
 
         try {
-            const response = await fetch(`${BASE_URL}/usuarios/UsuarioC`, {
+            // Apuntamos al endpoint /api/auth/register
+            const response = await fetch(`${BASE_URL}/auth/register`, {
                 method: 'POST',
-                body: backendFormData 
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data) 
             });
 
             if (!response.ok) {
-                // Si la respuesta es 401, es por la configuración de seguridad del backend
-                if (response.status === 401) {
-                     throw new Error('No autorizado. El backend necesita permitir el acceso público a la ruta de registro.');
-                }
                 const errorData = await response.json();
                 throw new Error(errorData.message || 'Error al crear el usuario.');
             }
@@ -192,6 +201,7 @@
             Swal.fire('Error de Registro', error.message, 'error');
         }
     });
-  </script>
+</script>
+
 </body>
 </html>

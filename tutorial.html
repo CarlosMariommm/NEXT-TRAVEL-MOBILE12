@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bienvenido a Next Travel</title>
+    <title>Tutorial de Bienvenida - Next Travel</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -20,6 +20,19 @@
             0% { background-position: 0% 50%; }
             50% { background-position: 100% 50%; }
             100% { background-position: 0% 50%; }
+        }
+        .btn-continuar {
+            background-color: #0d9237; 
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .btn-continuar:hover {
+            background-color: #0a6b28;
         }
     </style>
 </head>
@@ -53,31 +66,30 @@
             </div>
         </div>
 
-        <button id="start-exploring-btn" class="mt-8 w-full bg-blue-600 text-white font-bold py-3 rounded-full hover:bg-blue-700 transition-colors">
+        <button id="btn-continuar" class="mt-8 w-full bg-blue-600 text-white font-bold py-3 rounded-full hover:bg-blue-700 transition-colors">
             ¡Vamos!
         </button>
     </div>
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            const startExploringBtn = document.getElementById('start-exploring-btn');
+            const btnContinuar = document.getElementById('btn-continuar');
             const tutorialFlag = 'hasSeenDiscoverTutorial';
-
-            // 1. Comprueba si el usuario ya ha visto el tutorial
-            if (localStorage.getItem(tutorialFlag)) {
-                // Si ya lo vio, redirige inmediatamente a descubrir.html
-                // No verá esta página en absoluto.
-                window.location.href = 'descubrir.html';
+            
+            // ELIMINAMOS la redirección inmediata en la carga de la página (Paso 1 del código anterior)
+            // Esto asegura que la página de tutorial se muestre siempre si el usuario es dirigido aquí.
+            
+            // Añadir el listener de clic al botón para la redirección
+            if (btnContinuar) {
+                btnContinuar.addEventListener('click', () => {
+                    // Guarda en localStorage que el usuario ya vio el tutorial
+                    // Esto evita que vuelvan a ver la página si navegan directamente a descubrir.html
+                    localStorage.setItem(tutorialFlag, 'true');
+                    
+                    // Redirige a la página de descubrir
+                    window.location.href = 'descubrir.html';
+                });
             }
-
-            // 2. Si es la primera vez, el tutorial se muestra.
-            // Añadimos el evento al botón.
-            startExploringBtn.addEventListener('click', () => {
-                // Guarda en localStorage que el usuario ya vio el tutorial
-                localStorage.setItem(tutorialFlag, 'true');
-                // Redirige a la página de descubrir
-                window.location.href = 'descubrir.html';
-            });
         });
     </script>
 </body>
