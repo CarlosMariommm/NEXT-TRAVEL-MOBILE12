@@ -1,143 +1,197 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Inicia Sesión</title>
+  <title>Inicia Sesión - Next Travel</title>
   <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
   <div class="container">
-    <!-- SECCIÓN DE LOGIN -->
     <div class="form-box login">
       <form id="loginForm">
-        <h1>login</h1>
+        <h1>Iniciar Sesión</h1>
         <div class="input-box">
-          <input type="text" placeholder="Nombre de Usuario" name="loginUsuario">
+          <input type="email" placeholder="Correo Electrónico" name="correo" required>
           <i class='bx bxs-user'></i>
-          <div class="error-message"></div>
         </div>
         <div class="input-box">
-          <input type="password" placeholder="Contraseña" name="loginContrasena" id="loginPassword" autocomplete="new-password">
+          <input type="password" placeholder="Contraseña" name="password" id="loginPassword" autocomplete="current-password" required>
           <i class='bx bx-show password-toggle-icon' id="loginPasswordIcon"></i>
-          <div class="error-message"></div>
         </div>
         <div class="forgot-link">
-          <a href="#">Olvidó la contraseña?</a>
+          <a href="#">¿Olvidaste la contraseña?</a>
         </div>
         <button type="submit" class="btn">Iniciar Sesión</button>
-        <p>ó inicia sesión con plataformas sociales</p>
+        <p>o inicia sesión con plataformas sociales</p>
         <div class="social-icons">
-          <a href="#"><i class='bx bxl-google' ></i></a>
-          <a href="#"><i class='bx bxl-facebook' ></i></a>
-          <a href="#"><i class='bx bxl-github' ></i></a>
-          <a href="#"><i class='bx bxl-linkedin' ></i></a>
+          <a href="#"><i class='bx bxl-google'></i></a>
+          <a href="#"><i class='bx bxl-facebook'></i></a>
         </div>
       </form>
     </div>
 
-    <!-- SECCIÓN DE REGISTRO CON PASOS -->
     <div class="form-box register">
-      <form id="multiStepForm">
+      <form id="registerForm">
         <h1>Registrarse</h1>
         
-        <div class="progress-bar">
-            <div class="progress-bar-fill" id="progressBar"></div>
+        <div class="input-box">
+            <input type="text" placeholder="Nombre de Usuario" name="nombreUsuario" required>
+            <i class='bx bxs-user'></i>
         </div>
-
-        <!-- Paso 1: Datos de la Cuenta -->
-        <div class="step active">
-            <div class="input-box">
-                <input type="text" placeholder="Nombre de Usuario" name="usuario">
-                <i class='bx bxs-user'></i>
-                <div class="error-message"></div>
-            </div>
-            <div class="input-box">
-                <input type="email" placeholder="Correo" name="correo">
-                <i class='bx bxs-envelope'></i>
-                <div class="error-message"></div>
-            </div>
-            <div class="input-box">
-                <input type="password" placeholder="Contraseña" name="contrasena" id="registerPassword" autocomplete="new-password">
-                <i class='bx bx-show password-toggle-icon' id="registerPasswordIcon"></i>
-                <div class="error-message"></div>
-            </div>
+        <div class="input-box">
+            <input type="email" placeholder="Correo" name="correo" required>
+            <i class='bx bxs-envelope'></i>
         </div>
-
-        <!-- Paso 2: Información Personal -->
-        <div class="step">
-            <div class="input-box">
-                <input type="text" placeholder="Nombre Completo" name="nombreCompleto">
-                <i class='bx bxs-user-detail'></i>
-                <div class="error-message"></div>
-            </div>
-            <div class="input-box">
-                <input type="tel" placeholder="Número de Teléfono (8 dígitos)" name="telefono">
-                <i class='bx bxs-phone'></i>
-                <div class="error-message"></div>
-            </div>
+        <div class="input-box">
+            <input type="password" placeholder="Contraseña" name="password" id="registerPassword" autocomplete="new-password" required>
+            <i class='bx bx-show password-toggle-icon' id="registerPasswordIcon"></i>
         </div>
-
-        <!-- Paso 3: Verificación de Identidad -->
-        <div class="step">
-            <div class="input-box">
-                <input type="text" placeholder="DUI (9 dígitos sin guiones)" name="dui">
-                <i class='bx bxs-id-card'></i>
-                <div class="error-message"></div>
-            </div>
-        </div>
-
-        <!-- Paso 4: Selección de Rol -->
-        <div class="step">
-            <div class="input-box">
-                <select name="rol">
-                    <option value="" disabled selected>Selecciona tu rol</option>
-                    <option value="Cliente">Soy un Cliente</option>
-                    <option value="Empleado">Soy un Empleado</option>
-                </select>
-                <i class='bx bx-chevron-down'></i>
-                <div class="error-message"></div>
-            </div>
+        <div class="input-box">
+            <select name="rol" required>
+                <option value="" disabled selected>Selecciona tu rol</option>
+                <option value="Cliente">Soy un Cliente</option>
+                <option value="Empleado">Soy un Empleado</option>
+            </select>
+            <i class='bx bx-chevron-down'></i>
         </div>
         
-        <div class="form-navigation-btns">
-            <button type="button" class="btn" id="prevBtn">Anterior</button>
-            <button type="button" class="btn" id="nextBtn">Siguiente</button>
-        </div>
+        <button type="submit" class="btn">Registrarse</button>
         
-        <p>ó registrese con plataformas sociales</p>
+        <p>o regístrate con plataformas sociales</p>
         <div class="social-icons">
-            <a href="#"><i class='bx bxl-google' ></i></a>
-            <a href="#"><i class='bx bxl-facebook' ></i></a>
-            <a href="#"><i class='bx bxl-github' ></i></a>
-            <a href="#"><i class='bx bxl-linkedin' ></i></a>
+            <a href="#"><i class='bx bxl-google'></i></a>
+            <a href="#"><i class='bx bxl-facebook'></i></a>
         </div> 
       </form>
     </div>
 
-    <!-- PANEL DESLIZABLE -->
     <div class="toggle-box">
       <div class="toggle-panel toggle-left">
-        <h1>Hola, Bienvenido!</h1>
-        <p>No tienes una cuenta?</p>
+        <h1>¡Hola, Bienvenido!</h1>
+        <p>¿No tienes una cuenta?</p>
         <button class="btn register-btn">Registrarse</button>
       </div>
       <div class="toggle-panel toggle-right">
-        <h1>¡Bienvenido!</h1>
-        <p>Ya tienes una cuenta?</p>
+        <h1>¡Bienvenido de Vuelta!</h1>
+        <p>¿Ya tienes una cuenta?</p>
         <button class="btn login-btn">Iniciar Sesión</button>
       </div>
     </div>
   </div>
   
-    <script>
-      document.getElementById("loginBtn").addEventListener("click", function () {
-       window.location.href = "planes.html";
-      });
-    </script>
+  <script>
+    // =======================================================
+    //          LÓGICA DE INTERFAZ (UI) Y ANIMACIONES
+    // =======================================================
+    const container = document.querySelector('.container');
+    const registerBtn = document.querySelector('.register-btn');
+    const loginBtn = document.querySelector('.login-btn');
 
-  <script type="module" src="js/Controllers/usuarioController.js"></script>
-  <script src="js/auth.js"></script>
+    registerBtn.addEventListener('click', () => container.classList.add('active'));
+    loginBtn.addEventListener('click', () => container.classList.remove('active'));
+
+    function togglePasswordVisibility(inputId, iconId) {
+        const passwordInput = document.getElementById(inputId);
+        const passwordIcon = document.getElementById(iconId);
+        passwordIcon.addEventListener('click', () => {
+            const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+            passwordInput.setAttribute('type', type);
+            passwordIcon.classList.toggle('bx-show');
+            passwordIcon.classList.toggle('bx-hide');
+        });
+    }
+    togglePasswordVisibility('loginPassword', 'loginPasswordIcon');
+    togglePasswordVisibility('registerPassword', 'registerPasswordIcon');
+
+    // =======================================================
+    //          LÓGICA DE CONEXIÓN CON EL BACKEND
+    // =======================================================
+    const BASE_URL = 'http://localhost:8080/api';
+
+    // --- MANEJO DEL LOGIN (SIN CAMBIOS) ---
+    const loginForm = document.getElementById('loginForm');
+    loginForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const formData = new FormData(loginForm);
+        const data = {
+            correo: formData.get('correo'),
+            password: formData.get('password')
+        };
+
+        try {
+            const response = await fetch(`${BASE_URL}/auth/login`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(data)
+            });
+
+            if (response.ok) {
+                Swal.fire({
+                    title: '¡Éxito!', text: 'Inicio de sesión correcto.', icon: 'success',
+                    timer: 1500, showConfirmButton: false
+                }).then(() => {
+                    window.location.href = 'planes.html';
+                });
+            } else {
+                const errorText = await response.text();
+                Swal.fire('Error', errorText || 'Credenciales incorrectas.', 'error');
+            }
+        } catch (error) {
+            Swal.fire('Error de Conexión', 'No se pudo conectar con el servidor.', 'error');
+        }
+    });
+
+    // --- MANEJO DEL REGISTRO (SIMPLIFICADO) ---
+    const registerForm = document.getElementById('registerForm');
+    registerForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const formData = new FormData(registerForm);
+        
+        // El endpoint del backend espera los datos como FormData porque usa @RequestParam
+        const backendFormData = new FormData();
+        backendFormData.append('nombreUsuario', formData.get('nombreUsuario'));
+        backendFormData.append('correo', formData.get('correo'));
+        backendFormData.append('password', formData.get('password'));
+        backendFormData.append('rol', formData.get('rol'));
+        
+        // Mapeamos el rol de texto a un ID numérico que el backend espera
+        const idTipoUsuario = formData.get('rol') === 'Cliente' ? 1 : 2;
+        backendFormData.append('idTipoUsuario', idTipoUsuario);
+
+        try {
+            const response = await fetch(`${BASE_URL}/usuarios/UsuarioC`, {
+                method: 'POST',
+                body: backendFormData 
+            });
+
+            if (!response.ok) {
+                // Si la respuesta es 401, es por la configuración de seguridad del backend
+                if (response.status === 401) {
+                     throw new Error('No autorizado. El backend necesita permitir el acceso público a la ruta de registro.');
+                }
+                const errorData = await response.json();
+                throw new Error(errorData.message || 'Error al crear el usuario.');
+            }
+            
+            await response.json();
+
+            Swal.fire({
+                title: '¡Registro Exitoso!',
+                text: 'Tu cuenta ha sido creada. Ahora puedes iniciar sesión.',
+                icon: 'success'
+            }).then(() => {
+                container.classList.remove('active'); // Muestra el panel de login
+                registerForm.reset(); // Limpia el formulario
+            });
+
+        } catch (error) {
+            console.error('Error en el registro:', error);
+            Swal.fire('Error de Registro', error.message, 'error');
+        }
+    });
+  </script>
 </body>
 </html>
