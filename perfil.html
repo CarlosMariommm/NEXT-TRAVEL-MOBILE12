@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NextTravel - Perfil</title>
+    
+    <!-- Dependencias Externas -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Estilos CSS -->
+    <style>
+        /* --- AJUSTES GLOBALES Y VARIABLES DE COLOR --- */
+        :root {
+            --bg-color: #F8F9FA;
+            --text-primary: #333;
+            --text-secondary: #8A8A8E;
+            --card-bg: #FFFFFF;
+            --border-color: #F2F2F2;
+            --shadow-color: rgba(0, 0, 0, 0.05);
+        }
+
+        html.dark {
+            --bg-color: #121212;
+            --text-primary: #E0E0E0;
+            --text-secondary: #8A8A8E;
+            --card-bg: #1E1E1E;
+            --border-color: #2D2D2D;
+            --shadow-color: rgba(0, 0, 0, 0.2);
+        }
+
+        html { box-sizing: border-box; }
+        *, *:before, *:after { box-sizing: inherit; }
+        body { 
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            padding: 20px;
+            padding-bottom: 120px;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .container { max-width: 400px; margin: 0 auto; }
+
+        /* --- Estilos del Perfil --- */
+        .profile-header { display: flex; flex-direction: column; align-items: center; margin-bottom: 30px; }
+        .profile-avatar { width: 90px; height: 90px; border-radius: 50%; background: linear-gradient(135deg, #7B61FF, #A36FFC); display: flex; justify-content: center; align-items: center; color: white; font-size: 32px; font-weight: 600; margin-bottom: 15px; }
+        .profile-name { font-size: 24px; font-weight: 600; margin: 0; }
+        .profile-email { color: var(--text-secondary); margin: 4px 0; }
+        .profile-status { color: var(--text-secondary); font-size: 14px; font-weight: 500; margin: 0; }
+        .section-title { font-size: 18px; font-weight: 600; margin-bottom: 15px; }
+        .reservation-card { display: flex; align-items: center; background-color: var(--card-bg); padding: 15px; border-radius: 12px; margin-bottom: 10px; box-shadow: 0 4px 15px var(--shadow-color); transition: background-color 0.3s; }
+        .reservation-placeholder { width: 45px; height: 45px; border-radius: 8px; margin-right: 15px; background-color: #EEF2F5; display: flex; justify-content: center; align-items: center; font-size: 24px; color: #B0B9C2; }
+        html.dark .reservation-placeholder { background-color: #2D2D2D; color: #555; }
+        .reservation-details { flex-grow: 1; }
+        .reservation-details h3 { font-size: 16px; font-weight: 500; margin: 0; }
+        .reservation-details p { font-size: 14px; color: var(--text-secondary); margin: 4px 0 0; display: flex; align-items: center; }
+        .reservation-details p i { font-size: 16px; margin-right: 5px; }
+        .status { padding: 5px 12px; border-radius: 12px; font-size: 12px; font-weight: 500; }
+        .status-confirmado { background-color: #E6F9F0; color: #28A745; }
+        .status-pendiente { background-color: #FFF8E6; color: #FFC107; }
+        html.dark .status-confirmado { background-color: rgba(40, 167, 69, 0.2); }
+        html.dark .status-pendiente { background-color: rgba(255, 193, 7, 0.2); }
+        
+        .profile-menu { background-color: var(--card-bg); border-radius: 12px; margin-top: 30px; box-shadow: 0 4px 15px var(--shadow-color); overflow: hidden; transition: background-color 0.3s; }
+        .menu-item { display: flex; align-items: center; padding: 18px 15px; text-decoration: none; color: var(--text-primary); border-bottom: 1px solid var(--border-color); transition: color 0.3s, border-color 0.3s; }
+        .menu-item:last-child { border-bottom: none; }
+        .menu-item i { font-size: 22px; color: var(--text-secondary); margin-right: 15px; }
+        .menu-item span { flex-grow: 1; font-weight: 500; }
+        .menu-item .bx-chevron-right { color: #C7C7CC; font-size: 24px; margin-right: 0; }
+
+        /* --- ESTILOS PARA EL INTERRUPTOR DE MODO OSCURO --- */
+        .theme-switch-wrapper { display: flex; align-items: center; }
+        .theme-switch { display: inline-block; height: 24px; position: relative; width: 44px; }
+        .theme-switch input { display:none; }
+        .slider { background-color: #ccc; bottom: 0; cursor: pointer; left: 0; position: absolute; right: 0; top: 0; transition: .4s; border-radius: 34px; }
+        .slider:before { background-color: #fff; bottom: 4px; content: ""; height: 16px; left: 4px; position: absolute; transition: .4s; width: 16px; border-radius: 50%; }
+        input:checked + .slider { background-color: #7B61FF; }
+        input:checked + .slider:before { transform: translateX(20px); }
+
+        /* --- ESTILOS BARRA DE NAVEGACIÓN --- */
+        .fixed-nav { position: fixed; left: 50%; transform: translateX(-50%); bottom: 1.5rem; background-color: #111827; border-radius: 9999px; box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); padding: 0.5rem; z-index: 1000; }
+        .fixed-nav ul { list-style: none; margin: 0; padding: 0; display: flex; align-items: center; gap: 0.5rem; position: relative; }
+        .fixed-nav li { padding: 0.5rem; border-radius: 9999px; z-index: 10; position: relative; cursor: pointer; }
+        .fixed-nav .icon { width: 1.5rem; height: 1.5rem; stroke: #9CA3AF; transition: stroke 0.3s ease-in-out; display: block; }
+        .fixed-nav li.active .icon { stroke: #111827; }
+        #nav-indicator { position: absolute; top: 50%; left: 0; transform: translateY(-50%); width: 2.5rem; height: 2.5rem; background-color: white; border-radius: 9999px; transition: transform 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55); z-index: 5; }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <header class="profile-header">
+            <div class="profile-avatar">MG</div>
+            <h1 class="profile-name">María González</h1>
+            <p class="profile-email">maria.gonzalez@email.com</p>
+            <p class="profile-status">Viajero Gold</p>
+        </header>
+
+        <main>
+            <section>
+                <h2 class="section-title">Mis Reservas</h2>
+                <div class="reservation-card">
+                    <div class="reservation-placeholder"><i class='bx bx-image'></i></div>
+                    <div class="reservation-details">
+                        <h3>París</h3>
+                        <p><i class='bx bx-calendar'></i> 15 Mar</p>
+                    </div>
+                    <span class="status status-confirmado">Confirmado</span>
+                </div>
+                <div class="reservation-card">
+                    <img src="https://placehold.co/45x45/EFEFEF/333333?text=Roma" alt="Imagen de Roma" class="reservation-image">
+                    <div class="reservation-details">
+                        <h3>Roma</h3>
+                        <p><i class='bx bx-calendar'></i> 28 Feb</p>
+                    </div>
+                    <span class="status status-pendiente">Pendiente</span>
+                </div>
+            </section>
+            
+            <nav class="profile-menu">
+                <a href="editarperfil.html" class="menu-item"><i class='bx bx-user-circle'></i><span>Editar Perfil</span><i class='bx bx-chevron-right'></i></a>
+                <a href="#" class="menu-item"><i class='bx bx-briefcase-alt'></i><span>Mis Viajes</span><i class='bx bx-chevron-right'></i></a>
+                
+                <div class="menu-item">
+                    <i class='bx bx-moon'></i>
+                    <span>Modo Oscuro</span>
+                    <div class="theme-switch-wrapper">
+                        <label class="theme-switch" for="dark-mode-toggle">
+                            <input type="checkbox" id="dark-mode-toggle" />
+                            <span class="slider round"></span>
+                        </label>
+                    </div>
+                </div>
+            </nav>
+        </main>
+    </div>
+
+    <!-- Barra de Navegación Fija -->
+    <nav class="fixed-nav">
+        <ul>
+            <span id="nav-indicator"></span>
+            <li class="list"><a href="descubrir.html"><svg class="icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 21a9 9 0 100-18 9 9 0 000 18z" /><path stroke-linecap="round" stroke-linejoin="round" d="M15.91 8.09l-3.82 3.82-3.82-3.82 3.82-3.82 3.82 3.82z" /></svg></a></li>
+            <li class="list"><a href="planes.html"><svg class="icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M20.25 7.5l-.625 10.632a2.25 2.25 0 01-2.247 2.118H6.622a2.25 2.25 0 01-2.247-2.118L3.75 7.5M10 11.25h4M3.375 7.5h17.25c.621 0 1.125-.504 1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125H3.375c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125z" /></svg></a></li>
+            <li class="list"><a href="mapa.html"><svg class="icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" /></svg></a></li>
+            <li class="list active"><a href="perfil.html"><svg class="icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" /></svg></a></li>
+        </ul>
+    </nav>
+    
+    <!-- Scripts -->
+    <script>
+        // --- SCRIPT PARA MODO OSCURO ---
+        const darkModeToggle = document.getElementById('dark-mode-toggle');
+        const html = document.documentElement;
+
+        if (localStorage.getItem('theme') === 'dark') {
+            html.classList.add('dark');
+            if (darkModeToggle) darkModeToggle.checked = true;
+        }
+
+        if (darkModeToggle) {
+            darkModeToggle.addEventListener('change', () => {
+                if (darkModeToggle.checked) {
+                    html.classList.add('dark');
+                    localStorage.setItem('theme', 'dark');
+                } else {
+                    html.classList.remove('dark');
+                    localStorage.setItem('theme', 'light');
+                }
+            });
+        }
+
+        // --- SCRIPT PARA ANIMACIÓN DEL MENÚ ---
+        const listItems = document.querySelectorAll('.fixed-nav .list');
+        const indicator = document.getElementById('nav-indicator');
+
+        function moveIndicator(element) {
+            const position = element.offsetLeft;
+            const offset = (element.offsetWidth - indicator.offsetWidth) / 2;
+            indicator.style.transform = `translateX(${position + offset}px) translateY(-50%)`;
+        }
+
+        listItems.forEach(item => {
+            item.addEventListener('click', (e) => {
+                const link = item.querySelector('a').href;
+                if (window.location.href !== link) {
+                    e.preventDefault();
+                    if (item.classList.contains('active')) return;
+                    
+                    listItems.forEach(li => li.classList.remove('active'));
+                    item.classList.add('active');
+                    moveIndicator(item);
+
+                    setTimeout(() => {
+                        window.location.href = link;
+                    }, 400);
+                }
+            });
+        });
+
+        window.addEventListener('load', () => {
+            const initialActiveItem = document.querySelector('.fixed-nav .list.active');
+            if (initialActiveItem) {
+                moveIndicator(initialActiveItem);
+            }
+        });
+
+        document.addEventListener('DOMContentLoaded', () => {
+    const userProfile = JSON.parse(localStorage.getItem('userProfile'));
+
+    if (userProfile) {
+        document.getElementById('profile-name').textContent = userProfile.nombreCompleto;
+        document.getElementById('profile-email').textContent = userProfile.correo;
+        // Puedes agregar más campos como los puntos
+    } else {
+        // Si no hay sesión, redirigir al login
+        window.location.href = 'index.html';
+    }
+});
+
+    </script>
+    <nav class="fixed-nav">
+    <ul>
+        <span id="nav-indicator"></span>
+        <li class="list" data-page="descubrir.html"><a href="descubrir.html"><svg class="icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 21a9 9 0 100-18 9 9 0 000 18z" /><path stroke-linecap="round" stroke-linejoin="round" d="M15.91 8.09l-3.82 3.82-3.82-3.82 3.82-3.82 3.82 3.82z" /></svg></a></li>
+        <li class="list" data-page="planes.html"><a href="planes.html"><svg class="icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M20.25 7.5l-.625 10.632a2.25 2.25 0 01-2.247 2.118H6.622a2.25 2.25 0 01-2.247-2.118L3.75 7.5M10 11.25h4M3.375 7.5h17.25c.621 0 1.125-.504 1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125H3.375c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125z" /></svg></a></li>
+        <li class="list" data-page="mapa.html"><a href="mapa.html"><svg class="icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l5.447 2.724A1 1 0 0021 16.382V5.618a1 1 0 00-1.447-.894L15 7m-6 3l6-3" /></svg></a></li>
+        <li class="list" data-page="perfil.html"><a href="perfil.html"><svg class="icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" /></svg></a></li>
+    </ul>
+</nav>
+</body>
+</html>
+

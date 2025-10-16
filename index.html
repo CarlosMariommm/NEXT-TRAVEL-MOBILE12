@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Inicia Sesión</title>
+  <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div class="container">
+    <!-- SECCIÓN DE LOGIN -->
+    <div class="form-box login">
+      <form id="loginForm">
+        <h1>login</h1>
+        <div class="input-box">
+          <input type="text" placeholder="Nombre de Usuario" name="loginUsuario">
+          <i class='bx bxs-user'></i>
+          <div class="error-message"></div>
+        </div>
+        <div class="input-box">
+          <input type="password" placeholder="Contraseña" name="loginContrasena" id="loginPassword" autocomplete="new-password">
+          <i class='bx bx-show password-toggle-icon' id="loginPasswordIcon"></i>
+          <div class="error-message"></div>
+        </div>
+        <div class="forgot-link">
+          <a href="#">Olvidó la contraseña?</a>
+        </div>
+        <button type="submit" class="btn">Iniciar Sesión</button>
+        <p>ó inicia sesión con plataformas sociales</p>
+        <div class="social-icons">
+          <a href="#"><i class='bx bxl-google' ></i></a>
+          <a href="#"><i class='bx bxl-facebook' ></i></a>
+          <a href="#"><i class='bx bxl-github' ></i></a>
+          <a href="#"><i class='bx bxl-linkedin' ></i></a>
+        </div>
+      </form>
+    </div>
+
+    <!-- SECCIÓN DE REGISTRO CON PASOS -->
+    <div class="form-box register">
+      <form id="multiStepForm">
+        <h1>Registrarse</h1>
+        
+        <div class="progress-bar">
+            <div class="progress-bar-fill" id="progressBar"></div>
+        </div>
+
+        <!-- Paso 1: Datos de la Cuenta -->
+        <div class="step active">
+            <div class="input-box">
+                <input type="text" placeholder="Nombre de Usuario" name="usuario">
+                <i class='bx bxs-user'></i>
+                <div class="error-message"></div>
+            </div>
+            <div class="input-box">
+                <input type="email" placeholder="Correo" name="correo">
+                <i class='bx bxs-envelope'></i>
+                <div class="error-message"></div>
+            </div>
+            <div class="input-box">
+                <input type="password" placeholder="Contraseña" name="contrasena" id="registerPassword" autocomplete="new-password">
+                <i class='bx bx-show password-toggle-icon' id="registerPasswordIcon"></i>
+                <div class="error-message"></div>
+            </div>
+        </div>
+
+        <!-- Paso 2: Información Personal -->
+        <div class="step">
+            <div class="input-box">
+                <input type="text" placeholder="Nombre Completo" name="nombreCompleto">
+                <i class='bx bxs-user-detail'></i>
+                <div class="error-message"></div>
+            </div>
+            <div class="input-box">
+                <input type="tel" placeholder="Número de Teléfono (8 dígitos)" name="telefono">
+                <i class='bx bxs-phone'></i>
+                <div class="error-message"></div>
+            </div>
+        </div>
+
+        <!-- Paso 3: Verificación de Identidad -->
+        <div class="step">
+            <div class="input-box">
+                <input type="text" placeholder="DUI (9 dígitos sin guiones)" name="dui">
+                <i class='bx bxs-id-card'></i>
+                <div class="error-message"></div>
+            </div>
+        </div>
+
+        <!-- Paso 4: Selección de Rol -->
+        <div class="step">
+            <div class="input-box">
+                <select name="rol">
+                    <option value="" disabled selected>Selecciona tu rol</option>
+                    <option value="Cliente">Soy un Cliente</option>
+                    <option value="Empleado">Soy un Empleado</option>
+                </select>
+                <i class='bx bx-chevron-down'></i>
+                <div class="error-message"></div>
+            </div>
+        </div>
+        
+        <div class="form-navigation-btns">
+            <button type="button" class="btn" id="prevBtn">Anterior</button>
+            <button type="button" class="btn" id="nextBtn">Siguiente</button>
+        </div>
+        
+        <p>ó registrese con plataformas sociales</p>
+        <div class="social-icons">
+            <a href="#"><i class='bx bxl-google' ></i></a>
+            <a href="#"><i class='bx bxl-facebook' ></i></a>
+            <a href="#"><i class='bx bxl-github' ></i></a>
+            <a href="#"><i class='bx bxl-linkedin' ></i></a>
+        </div> 
+      </form>
+    </div>
+
+    <!-- PANEL DESLIZABLE -->
+    <div class="toggle-box">
+      <div class="toggle-panel toggle-left">
+        <h1>Hola, Bienvenido!</h1>
+        <p>No tienes una cuenta?</p>
+        <button class="btn register-btn">Registrarse</button>
+      </div>
+      <div class="toggle-panel toggle-right">
+        <h1>¡Bienvenido!</h1>
+        <p>Ya tienes una cuenta?</p>
+        <button class="btn login-btn">Iniciar Sesión</button>
+      </div>
+    </div>
+  </div>
+  
+    <script>
+      document.getElementById("loginBtn").addEventListener("click", function () {
+       window.location.href = "planes.html";
+      });
+    </script>
+
+  <script type="module" src="js/Controllers/usuarioController.js"></script>
+  <script src="js/auth.js"></script>
+</body>
+</html>

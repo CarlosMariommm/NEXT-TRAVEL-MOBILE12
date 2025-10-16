@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+	<link rel="stylesheet" href="css/global.css" />
+	<link rel="stylesheet" href="css/header.css" />
+	<link rel="stylesheet" href="css/tours.css" />
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css">
+    <title>Promociones</title>
+    <style>
+        /* Estilos de la nueva barra de navegación */
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+        .navigation {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 375px;
+            height: 70px;
+            background: #ffffff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+        }
+        .navigation ul {
+            display: flex;
+            width: 100%;
+            padding: 0;
+            margin: 0;
+        }
+        .navigation ul li {
+            position: relative;
+            list-style: none;
+            width: 75px;
+            height: 70px;
+            z-index: 1;
+        }
+        .navigation ul li a {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            width: 100%;
+            text-align: center;
+            font-weight: 500;
+            text-decoration: none;
+        }
+        .navigation ul li a .icon {
+            position: relative;
+            display: block;
+            line-height: 75px;
+            font-size: 1.5em;
+            text-align: center;
+            transition: 0.5s;
+            color: #222327;
+        }
+        .navigation ul li.active a .icon {
+            transform: translateY(-32px);
+        }
+        .navigation ul li a .text {
+            position: absolute;
+            color: #222327;
+            font-weight: 400;
+            font-size: 0.75em;
+            letter-spacing: 0.05em;
+            transition: 0.5s;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        .navigation ul li.active a .text {
+            opacity: 1;
+            transform: translateY(10px);
+        }
+        .indicator {
+            position: absolute;
+            top: -50%;
+            width: 70px;
+            height: 70px;
+            background: #29fd53;
+            border-radius: 50%;
+            border: 6px solid #f0f2f5;
+            transition: 0.5s;
+        }
+        .indicator::before, .indicator::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            width: 20px;
+            height: 20px;
+            background: transparent;
+        }
+        .indicator::before {
+            left: -22px;
+            border-top-right-radius: 20px;
+            box-shadow: 1px -10px 0 0 #f0f2f5;
+        }
+        .indicator::after {
+            right: -22px;
+            border-top-left-radius: 20px;
+            box-shadow: -1px -10px 0 0 #f0f2f5;
+        }
+        body {
+            font-family: 'Poppins', sans-serif;
+            padding-bottom: 100px; /* Espacio para la navbar fija */
+        }
+    </style>
+</head>
+<body>
+    <h2 class="title">Promociones</h2>
+    <main class="container">
+		<section class="main-tours">
+			<div class="container-tours">
+				<!-- Tour 1 -->
+				<div class="card-tour">
+					<div class="container-img">
+						<img src="img/89175dbf-07b6-473f-a19c-80d7ac598a90-scaled.jpg" alt="Volcán Santa Ana" />
+						<div class="container-icon"><i class="fa-regular fa-heart"></i></div>
+					</div>
+					<div class="content-card-tour">
+						<div class="container-location-price">
+							<span class="location"><i class="fa-solid fa-map-marker-alt"></i> Santa Ana</span>
+							<span class="price">$75</span>
+						</div>
+						<div class="container-title">
+							<h3>Ascenso al Volcán Santa Ana</h3>
+							<span class="type">Aventura</span>
+						</div>
+						<div class="details">
+							<span class="capacity-person"><i class="fa-solid fa-user-group"></i> 15 personas</span>
+							<span class="time"><i class="fa-solid fa-clock"></i> 1 día</span>
+						</div>
+						<p class="description">
+							Disfruta de una caminata espectacular hasta la cima del Volcán Santa Ana, el más alto de El Salvador.
+						</p>
+						<div class="reviews">
+							<span class="stars">
+								<i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+							</span>
+							<span class="count-reviews">(48 Reseñas)</span>
+						</div>
+						<div class="footer-card-tour">
+							<a href="detailsVolcan.html" class="btn btn-outline">Detalles</a>
+							<a href="detailsVolcan.html" class="btn btn-solid">Reservar</a>
+						</div>
+					</div>
+				</div>
+
+				<!-- Tour 2 -->
+				<div class="card-tour">
+					<div class="container-img">
+						<img src="img/El Tunco.jpg" alt="Playa El Tunco" />
+						<div class="container-icon"><i class="fa-regular fa-heart"></i></div>
+					</div>
+					<div class="content-card-tour">
+						<div class="container-location-price">
+							<span class="location"><i class="fa-solid fa-map-marker-alt"></i> La Libertad</span>
+							<span class="price">$50</span>
+						</div>
+						<div class="container-title">
+							<h3>Surf en Playa El Tunco</h3>
+							<span class="type">Deportes</span>
+						</div>
+						<div class="details">
+							<span class="capacity-person"><i class="fa-solid fa-user-group"></i> 20 personas</span>
+							<span class="time"><i class="fa-solid fa-clock"></i> Medio día</span>
+						</div>
+						<p class="description">
+							Disfruta de las mejores olas para surfear en la costa salvadoreña, ideal para principiantes y expertos.
+						</p>
+						<div class="reviews">
+							<span class="stars">
+								<i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star gray"></i>
+							</span>
+							<span class="count-reviews">(32 Reseñas)</span>
+						</div>
+						<div class="footer-card-tour">
+							<a href="detailsTunco.html" class="btn btn-outline">Detalles</a>
+							<a href="detailsTunco.html" class="btn btn-solid">Reservar</a>
+						</div>
+					</div>
+				</div>
+
+				<!-- Tour 3 -->
+				<div class="card-tour">
+					<div class="container-img">
+						<img src="img/10012021-El-Imposible-APPEX-5.jpg" alt="Parque Nacional El Imposible" />
+						<div class="container-icon"><i class="fa-regular fa-heart"></i></div>
+					</div>
+					<div class="content-card-tour">
+						<div class="container-location-price">
+							<span class="location"><i class="fa-solid fa-map-marker-alt"></i> Ahuachapán</span>
+							<span class="price">$90</span>
+						</div>
+						<div class="container-title">
+							<h3>Excursión al Parque Nacional El Imposible</h3>
+							<span class="type">Naturaleza</span>
+						</div>
+						<div class="details">
+							<span class="capacity-person"><i class="fa-solid fa-user-group"></i> 12 personas</span>
+							<span class="time"><i class="fa-solid fa-clock"></i> 1 día</span>
+						</div>
+						<p class="description">
+							Explora la biodiversidad de El Imposible, uno de los parques naturales más importantes del país.
+						</p>
+						<div class="reviews">
+							<span class="stars">
+								<i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star gray"></i><i class="fa-solid fa-star gray"></i>
+							</span>
+							<span class="count-reviews">(25 Reseñas)</span>
+						</div>
+						<div class="footer-card-tour">
+							<a href="detailsImposible.html" class="btn btn-outline">Detalles</a>
+							<a href="detailsImposible.html" class="btn btn-solid">Reservar</a>
+						</div>
+					</div>
+				</div>
+
+				<!-- Tour 4 -->
+				<div class="card-tour">
+					<div class="container-img">
+						<img src="img/Coatepeque-Lake.jpeg" alt="Lago de Coatepeque" />
+						<div class="container-icon"><i class="fa-regular fa-heart"></i></div>
+					</div>
+					<div class="content-card-tour">
+						<div class="container-location-price">
+							<span class="location"><i class="fa-solid fa-map-marker-alt"></i> Santa Ana</span>
+							<span class="price">$65</span>
+						</div>
+						<div class="container-title">
+							<h3>Paseo en Lago de Coatepeque</h3>
+							<span class="type">Relax</span>
+						</div>
+						<div class="details">
+							<span class="capacity-person"><i class="fa-solid fa-user-group"></i> 10 personas</span>
+							<span class="time"><i class="fa-solid fa-clock"></i> Medio día</span>
+						</div>
+						<p class="description">
+							Disfruta de un paseo en lancha por el hermoso Lago de Coatepeque, rodeado de naturaleza y tranquilidad.
+						</p>
+						<div class="reviews">
+							<span class="stars">
+								<i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star gray"></i>
+							</span>
+							<span class="count-reviews">(18 Reseñas)</span>
+						</div>
+						<div class="footer-card-tour">
+							<a href="detailsCoate.html" class="btn btn-outline">Detalles</a>
+							<a href="detailsCoate.html" class="btn btn-solid">Reservar</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<section class="container-pagination">
+			<a href="#" class="active">1</a>
+			<a href="#">2</a>
+			<a href="#">3</a>
+			<a href="#">4</a>
+			<a href="#" class="next"><i class="fa-solid fa-chevron-right"></i></a>
+		</section>
+	</main>
+
+	<!-- Barra de Navegación Fija -->
+    <nav class="fixed bottom-6 bg-gray-900 rounded-full shadow-lg p-3">
+        <ul class="nav-list flex items-center gap-x-2 relative">
+            <span id="nav-indicator" class="absolute top-1/2 -translate-y-1/2 w-12 h-12 bg-white rounded-full transition-transform duration-300 ease-in-out"></span>
+            <li class="list active p-3 rounded-full z-10"><a href="descubrir.html"><svg class="icon w-6 h-6" fill="none" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v.01M12 6v-1m0-1V4m0 2v1m0 0v1m-6 11h12a2 2 0 002-2V7a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg></a></li>
+            <li class="list p-3 rounded-full z-10"><a href="planes.html"><svg class="icon w-6 h-6" fill="none" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" /></svg></a></li>
+            <li class="list p-3 rounded-full z-10"><a href="mapa.html"><svg class="icon w-6 h-6" fill="none" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" /></svg></a></li>
+            <li class="list p-3 rounded-full z-10"><a href="perfil.html"><svg class="icon w-6 h-6" fill="none" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" /></svg></a></li>
+        </ul>
+    </nav>
+
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        const list = document.querySelectorAll('.list');
+        const indicator = document.querySelector('.indicator');
+        const initialActive = document.querySelector('.list.active');
+
+        function moveIndicator(element) {
+            const index = Array.from(list).indexOf(element);
+            indicator.style.transform = `translateX(calc(${index * 75}px))`;
+        }
+
+        function activeLink() {
+            list.forEach(item => item.classList.remove('active'));
+            this.classList.add('active');
+            moveIndicator(this);
+        }
+
+        list.forEach(item => item.addEventListener('click', activeLink));
+        
+        if (initialActive) {
+            moveIndicator(initialActive);
+        }
+    </script>
+	<nav class="fixed-nav">
+    <ul>
+        <span id="nav-indicator"></span>
+        <li class="list" data-page="descubrir.html"><a href="descubrir.html"><svg class="icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 21a9 9 0 100-18 9 9 0 000 18z" /><path stroke-linecap="round" stroke-linejoin="round" d="M15.91 8.09l-3.82 3.82-3.82-3.82 3.82-3.82 3.82 3.82z" /></svg></a></li>
+        <li class="list" data-page="planes.html"><a href="planes.html"><svg class="icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M20.25 7.5l-.625 10.632a2.25 2.25 0 01-2.247 2.118H6.622a2.25 2.25 0 01-2.247-2.118L3.75 7.5M10 11.25h4M3.375 7.5h17.25c.621 0 1.125-.504 1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125H3.375c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125z" /></svg></a></li>
+        <li class="list" data-page="mapa.html"><a href="mapa.html"><svg class="icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l5.447 2.724A1 1 0 0021 16.382V5.618a1 1 0 00-1.447-.894L15 7m-6 3l6-3" /></svg></a></li>
+        <li class="list" data-page="perfil.html"><a href="perfil.html"><svg class="icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" /></svg></a></li>
+    </ul>
+</nav>
+</body>
+</html>

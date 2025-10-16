@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NextTravel - Editar Perfil</title>
+    
+    <!-- Dependencias Externas -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Estilos CSS con Variables para Modo Oscuro -->
+    <style>
+        :root {
+            --bg-color: #F8F9FA;
+            --card-bg-color: #FFFFFF;
+            --text-primary: #111827;
+            --text-secondary: #6B7280;
+            --border-color: #E5E7EB;
+            --input-bg: #FFFFFF;
+            --shadow-color: rgba(0, 0, 0, 0.05);
+            --button-primary-bg: #1E3A8A; /* Azul 900 */
+            --button-primary-hover-bg: #1E40AF; /* Azul 800 */
+        }
+
+        html.dark {
+            --bg-color: #121212;
+            --card-bg-color: #1E1E1E;
+            --text-primary: #E0E0E0;
+            --text-secondary: #9CA3AF;
+            --border-color: #374151;
+            --input-bg: #2D2D2D;
+            --shadow-color: rgba(0, 0, 0, 0.2);
+        }
+
+        html { box-sizing: border-box; }
+        *, *:before, *:after { box-sizing: inherit; }
+        body { 
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            padding-bottom: 120px;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .container { max-width: 400px; margin: 0 auto; padding: 20px; }
+        
+        /* --- Estilos del Formulario Adaptados a Modo Oscuro --- */
+        .form-label { color: var(--text-secondary); }
+        .form-input { 
+            background-color: var(--input-bg); 
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+            box-shadow: 0 1px 2px 0 var(--shadow-color);
+        }
+        .header-title, .header-icon { color: var(--text-primary); }
+        .save-button { background-color: var(--button-primary-bg); }
+        .save-button:hover { background-color: var(--button-primary-hover-bg); }
+
+        /* --- Fila para Modo Oscuro --- */
+        .settings-item { 
+            display: flex; 
+            align-items: center; 
+            background-color: var(--input-bg);
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+            padding: 1rem;
+            border-radius: 1rem; /* rounded-2xl */
+            margin-top: 1.5rem; /* space-y-6 */
+        }
+        .settings-item i { font-size: 22px; color: var(--text-secondary); margin-right: 15px; }
+        .settings-item span { flex-grow: 1; font-weight: 500; }
+
+        /* --- ESTILOS PARA EL INTERRUPTOR DE MODO OSCURO --- */
+        .theme-switch-wrapper { display: flex; align-items: center; }
+        .theme-switch { display: inline-block; height: 24px; position: relative; width: 44px; }
+        .theme-switch input { display:none; }
+        .slider { background-color: #ccc; bottom: 0; cursor: pointer; left: 0; position: absolute; right: 0; top: 0; transition: .4s; border-radius: 34px; }
+        .slider:before { background-color: #fff; bottom: 4px; content: ""; height: 16px; left: 4px; position: absolute; transition: .4s; width: 16px; border-radius: 50%; }
+        input:checked + .slider { background-color: #7B61FF; }
+        input:checked + .slider:before { transform: translateX(20px); }
+
+        /* --- ESTILOS BARRA DE NAVEGACIÓN --- */
+        .fixed-nav { position: fixed; left: 50%; transform: translateX(-50%); bottom: 1.5rem; background-color: #111827; border-radius: 9999px; box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); padding: 0.5rem; z-index: 1000; }
+        .fixed-nav ul { list-style: none; margin: 0; padding: 0; display: flex; align-items: center; gap: 0.5rem; position: relative; }
+        .fixed-nav li { padding: 0.5rem; border-radius: 9999px; z-index: 10; position: relative; cursor: pointer; }
+        .fixed-nav .icon { width: 1.5rem; height: 1.5rem; stroke: #9CA3AF; transition: stroke 0.3s ease-in-out; display: block; }
+        .fixed-nav li.active .icon { stroke: #111827; }
+        #nav-indicator { position: absolute; top: 50%; left: 0; transform: translateY(-50%); width: 2.5rem; height: 2.5rem; background-color: white; border-radius: 9999px; transition: transform 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55); z-index: 5; }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- Header -->
+        <header class="relative flex justify-center items-center py-4 mb-4">
+            <a href="#" class="absolute left-0" onclick="history.back(); return false;">
+                <i class='bx bx-chevron-left text-3xl header-icon'></i>
+            </a>
+            <h1 class="text-xl font-semibold header-title">User Profile</h1>
+        </header>
+
+        <!-- Profile Picture -->
+        <div class="flex justify-center mb-8">
+            <div class="relative w-32 h-32">
+                <img src="https://placehold.co/128x128/7B61FF/FFFFFF?text=MG" alt="User Avatar" class="rounded-full w-full h-full object-cover">
+                <button class="absolute bottom-1 right-1 flex items-center justify-center w-8 h-8 bg-white rounded-full shadow-md hover:bg-gray-100 transition">
+                    <i class='bx bx-camera text-lg text-gray-600'></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Formulario de Edición -->
+        <main>
+            <form class="space-y-6">
+                <div>
+                    <label for="full-name" class="block text-sm font-medium form-label mb-2">Nombre Completo</label>
+                    <input type="text" id="full-name" value="María" class="w-full p-4 form-input rounded-2xl focus:ring-2 focus:ring-purple-400 focus:border-transparent outline-none transition">
+                </div>
+                
+                <div>
+                    <label for="email" class="block text-sm font-medium form-label mb-2">Correo</label>
+                    <input type="email" id="email" value="maria.gonzalez@email.com" class="w-full p-4 form-input rounded-2xl focus:ring-2 focus:ring-purple-400 focus:border-transparent outline-none transition">
+                </div>
+
+                <div class="pt-6">
+                    <button type="submit" class="w-full py-3 save-button text-white font-bold rounded-full shadow-lg transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-900">Guardar</button>
+                </div>
+            </form>
+        </main>
+    </div>
+
+    
+    <!-- Scripts -->
+    <script>
+       
+        // Función para aplicar el tema
+        function applyTheme(theme) {
+            if (theme === 'dark') {
+                html.classList.add('dark');
+                if(darkModeToggle) darkModeToggle.checked = true;
+            } else {
+                html.classList.remove('dark');
+                if(darkModeToggle) darkModeToggle.checked = false;
+            }
+        }
+
+        // Aplicar tema al cargar la página
+        const savedTheme = localStorage.getItem('theme') || 'light';
+        applyTheme(savedTheme);
+
+        // Listener para el interruptor
+        if(darkModeToggle) {
+            darkModeToggle.addEventListener('change', () => {
+                const newTheme = darkModeToggle.checked ? 'dark' : 'light';
+                localStorage.setItem('theme', newTheme);
+                applyTheme(newTheme);
+            });
+        }
+
+        // --- SCRIPT PARA ANIMACIÓN DEL MENÚ ---
+        const listItems = document.querySelectorAll('.fixed-nav .list');
+        const indicator = document.getElementById('nav-indicator');
+
+        function moveIndicator(element) {
+            const position = element.offsetLeft;
+            const offset = (element.offsetWidth - indicator.offsetWidth) / 2;
+            indicator.style.transform = `translateX(${position + offset}px) translateY(-50%)`;
+        }
+
+        listItems.forEach(item => {
+            item.addEventListener('click', (e) => {
+                const link = item.querySelector('a').href;
+                if (window.location.href !== link) {
+                    e.preventDefault();
+                    if (item.classList.contains('active')) return;
+                    
+                    listItems.forEach(li => li.classList.remove('active'));
+                    item.classList.add('active');
+                    moveIndicator(item);
+
+                    setTimeout(() => {
+                        window.location.href = link;
+                    }, 400);
+                }
+            });
+        });
+
+        window.addEventListener('load', () => {
+            const initialActiveItem = document.querySelector('.fixed-nav .list.active');
+            if (initialActiveItem) {
+                moveIndicator(initialActiveItem);
+            }
+        });
+    </script>
+</body>
+</html>
+

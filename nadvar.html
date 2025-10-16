@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <title>Vista Previa de Navegación | Next Travel</title>
+    <style>
+        /* Estilos generales para centrar y dar un fondo a la página */
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: #f0f2f5; /* Un color de fondo suave */
+        }
+
+        /* Contenedor principal de la barra de navegación */
+        .navigation {
+            width: 375px; /* Ancho ajustado para 5 elementos */
+            height: 70px;
+            background: #ffffff;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .navigation ul {
+            display: flex;
+            width: 100%; /* Ocupa todo el ancho del contenedor */
+            padding: 0;
+        }
+        
+        /* Estilo de cada elemento de la lista */
+        .navigation ul li {
+            position: relative;
+            list-style: none;
+            width: 75px; /* Ancho de cada botón (375px / 5 items) */
+            height: 70px;
+            z-index: 1;
+        }
+
+        .navigation ul li a {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            width: 100%;
+            text-align: center;
+            font-weight: 500;
+        }
+        
+        /* Estilo para los iconos */
+        .navigation ul li a .icon {
+            position: relative;
+            display: block;
+            line-height: 75px;
+            font-size: 1.5em;
+            text-align: center;
+            transition: 0.5s;
+            color: #222327;
+        }
+        
+        /* Movimiento del icono cuando el elemento está activo */
+        .navigation ul li.active a .icon {
+            transform: translateY(-32px);
+        }
+        
+        /* Estilo para el texto debajo del icono */
+        .navigation ul li a .text {
+            position: absolute;
+            color: #222327;
+            font-weight: 400;
+            font-size: 0.75em;
+            letter-spacing: 0.05em;
+            transition: 0.5s;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        
+        /* Aparición del texto cuando el elemento está activo */
+        .navigation ul li.active a .text {
+            opacity: 1;
+            transform: translateY(10px);
+        }
+        
+        /* El indicador circular que se mueve */
+        .indicator {
+            position: absolute;
+            top: -50%;
+            width: 70px;
+            height: 70px;
+            background: #29fd53;
+            border-radius: 50%;
+            border: 6px solid #f0f2f5;
+            transition: 0.5s;
+        }
+
+        .indicator::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: -22px;
+            width: 20px;
+            height: 20px;
+            background: transparent;
+            border-top-right-radius: 20px;
+            box-shadow: 1px -10px 0 0 #f0f2f5;
+        }
+        
+        .indicator::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            right: -22px;
+            width: 20px;
+            height: 20px;
+            background: transparent;
+            border-top-left-radius: 20px;
+            box-shadow: -1px -10px 0 0 #f0f2f5;
+        }
+    </style>
+</head>
+<body>
+    <div class="navigation">
+        <ul>
+            <!-- Apartado "Descubrir" añadido -->
+            <li class="list active">
+                <a href="#">
+                    <span class="icon"><i class='bx bxs-compass'></i></span>
+                    <span class="text">Descubrir</span>
+                </a>
+            </li>
+            <!-- "Inicio" renombrado a "Paquetes" -->
+            <li class="list">
+                <a href="#">
+                    <span class="icon"><i class='bx bxs-package'></i></span>
+                    <span class="text">Paquetes</span>
+                </a>
+            </li>
+            <li class="list">
+                <a href="#">
+                    <span class="icon"><i class='bx bxs-purchase-tag'></i></span>
+                    <span class="text">Promos</span>
+                </a>
+            </li>
+            <li class="list">
+                <a href="#">
+                    <span class="icon"><i class='bx bx-map-alt'></i></span>
+                    <span class="text">Mapa</span>
+                </a>
+            </li>
+            <li class="list">
+                <a href="#">
+                    <span class="icon"><i class='bx bx-user'></i></span>
+                    <span class="text">Perfil</span>
+                </a>
+            </li>
+            <div class="indicator"></div>
+        </ul>
+    </div>
+
+    <script>
+        const list = document.querySelectorAll('.list');
+        const indicator = document.querySelector('.indicator');
+
+        function activeLink() {
+            // Elimina la clase 'active' de todos los elementos
+            list.forEach(item => item.classList.remove('active'));
+            // Añade la clase 'active' al elemento clickeado
+            this.classList.add('active');
+
+            // Mueve el indicador
+            moveIndicator(this);
+        }
+
+        function moveIndicator(element) {
+            // La posición se calcula como el índice del elemento por su ancho (75px)
+            const index = Array.from(list).indexOf(element);
+            indicator.style.transform = `translateX(calc(${index * 75}px))`;
+        }
+
+        // Añade el evento click a cada elemento
+        list.forEach(item => item.addEventListener('click', activeLink));
+
+        // Mueve el indicador a la posición inicial del elemento activo al cargar la página
+        const initialActive = document.querySelector('.list.active');
+        if(initialActive) {
+            moveIndicator(initialActive);
+        }
+    </script>
+</body>
+</html>
+
